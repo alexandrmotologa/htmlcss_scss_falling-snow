@@ -1,0 +1,118 @@
+$blue: blue;
+$white: white;
+$grayish: #334;
+$size: 1vh;
+
+@mixin falling($duration: 10s){
+
+    .flake{
+        top: -$size;
+        border-radius: 100%;
+        position: absolute;
+        animation-name: fall;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-duration: $duration;
+
+        @for $n from 1 through 100{
+            &:nth-child(#{$n}){
+            left: 1% * random(100);
+            animation-delay: 0.5s * random(40);
+            }
+        }
+    }
+}
+
+body {
+    background-image: url('bg3.jpg');
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-position:center;
+}
+.snow-container-1{
+    position: fixed;
+
+    width: 75vw;
+    height: 78vh;
+    top: 0;
+    left: 0;
+
+    @include falling;
+}
+.snow-container-2{
+    position: fixed;
+
+    width: 24vw;
+    height: 78vh;
+    top: 0;
+    right: 0;
+
+    @include falling;
+}
+.snow-container-3{
+    position: fixed;
+
+    width: 24vw;
+    height: 78vh;
+    top: 0;
+    right: 0;
+
+    @include falling(15s);
+}
+.snow-container-4{
+    position: fixed;
+
+    width: 24vw;
+    height: 78vh;
+    top: 0;
+    right: 0;
+
+    @include falling(30s);
+}
+.snow-container-5{
+    position: fixed;
+
+    width: 70vw;
+    height: 30vh;
+    top: 0;
+    left: 0;
+
+    @include falling(5s);
+}
+
+.distance-{
+    &sm{
+        .flake{
+            height: $size;
+            width: $size;
+            // animation-duration: 20s;
+            background-image: 
+                radial-gradient($white 10%, transparent);
+        }
+    }
+    &md{
+        .flake{
+            height: $size * 0.7;
+            width: $size * 0.7;
+            // animation-duration: 20s * 2;
+            background-image: 
+                radial-gradient(darken($white, 20%) 40%, transparent);
+        }
+    }
+    &lg{
+        .flake{
+            height: $size * 0.5;
+            width: $size * 0.5;
+            // animation-duration: 20s * 4;
+            background-image: 
+                radial-gradient(darken($white, 30%) 40%, transparent);
+            opacity: 0.5;
+        }
+    }
+}
+
+
+@keyframes fall{
+    from {top: -$size;}
+    to{top: 100%;}
+}
